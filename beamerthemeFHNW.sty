@@ -1,0 +1,43 @@
+% ----------------------------------------
+% Beamer-Layout der Fachhochschule Nordwestschweiz
+% copyright Stefan Blaser, 2017
+% V: 01.04.2017
+%-----------------------------------------
+\usepackage{xcolor}
+\usepackage{calc}
+
+% Kopfzeile
+\setbeamertemplate{headline}{\vspace*{1.5mm}\hspace*{3mm}\includegraphics[height=7mm]{./Abbildungen/FHNW_HABG_10mm.jpg}}
+
+% Fusszeile
+\setbeamertemplate{footline}{\hspace*{3mm}\copyright\ \insertdate, \insertauthor, \insertinstitute
+	\hfill \insertsubtitle 
+	\hfill \insertframenumber/\inserttotalframenumber \hspace*{3mm} \vspace*{1mm}}
+
+
+% Gelber FHNW-Balken links
+\setbeamersize{sidebar width left=0.5cm}
+\setbeamertemplate{sidebar canvas left}{
+  \vspace*{\fill}
+  \colorbox{blue}{\makebox(18,120){\textcolor{white}{}}}
+  \vspace*{\fill}
+}
+
+% Titelseite
+\defbeamertemplate*{title page}{customized}[1][]
+{
+  \setbeamercolor{title}{fg=black}
+  \usebeamerfont{title}\hspace*{4mm}\parbox{\textwidth-4\fboxsep}{\inserttitle}\par
+  \bigskip
+  \usebeamerfont{subtitle}\hspace*{4mm}\parbox{\textwidth-4\fboxsep}{\insertsubtitle}\par
+  \bigskip
+  \usebeamerfont{author}\hspace*{4mm}\parbox{\textwidth-4\fboxsep}{\insertauthor}\par
+  \usebeamerfont{institute}\hspace*{4mm}\parbox{\textwidth-4\fboxsep}{\insertinstitute}\par
+  \usebeamerfont{date}\hspace*{4mm}\parbox{\textwidth-4\fboxsep}{\insertdate}\par
+  \usebeamercolor[fg]{titlegraphic}\inserttitlegraphic
+  
+}
+
+% Folientitel
+\setbeamertemplate{frametitle}{\vspace*{5mm}\insertframetitle}
+\setbeamercolor{frametitle}{fg=black}

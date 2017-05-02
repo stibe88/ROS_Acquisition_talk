@@ -1,0 +1,5 @@
+\beamer@endinputifotherversion {3.36pt}
+\select@language {ngerman}
+\beamer@sectionintoc {1}{Introduction}{2}{0}{1}
+\beamer@sectionintoc {2}{Software Requirements}{9}{0}{2}
+\beamer@sectionintoc {3}{Robot Operating System (ROS)}{11}{0}{3}

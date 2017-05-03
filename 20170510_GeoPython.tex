@@ -1,7 +1,7 @@
 \documentclass[aspectratio=169]{beamer}
 \usepackage[utf8]{inputenc}
 \usepackage{amsmath}
-\usepackage[ngerman]{babel}
+%\usepackage[ngerman]{babel}
 \usepackage{xcolor}
 \usepackage{listings}
 %\usepackage[automark]{scrpage2}
@@ -73,11 +73,7 @@
   \begin{frame}
    \frametitle{Introduction}
    \begin{columns}[onlytextwidth]
-    \begin{column}{0.5\textwidth}
-    
-    % TODO insert Image (outdoor Mobile Mapping)
-    
-    \end{column}
+
     \begin{column}{0.5\textwidth}
     Mobile Mapping
       \begin{itemize}
@@ -93,6 +89,17 @@
        \end{itemize}
       \end{itemize}
     \end{column}
+    \begin{column}{0.5\textwidth}
+    
+     \begin{figure}[h]
+       \centering
+       \includegraphics[width=5.5cm]{./Abbildungen/mms.png}
+       \caption{Mobile Mapping vehicle of FHNW}
+       \label{abb:mms}
+     \end{figure}
+     
+    \end{column}
+    
    \end{columns}
   \end{frame}
 
@@ -100,11 +107,7 @@
   \begin{frame}
    \frametitle{Introduction}
    \begin{columns}[onlytextwidth]
-    \begin{column}{0.5\textwidth}
-    
-    % TODO insert Image (Logos FHNW / iNovitas / KTI)
-    
-    \end{column}
+
     \begin{column}{0.5\textwidth}
     CTI project ``BIMAGE''
       \begin{itemize}
@@ -120,6 +123,18 @@
        \end{itemize}
       \end{itemize}
     \end{column}
+    \begin{column}{0.5\textwidth}
+    \begin{center}
+    \includegraphics[width=0.9\textwidth]{./Abbildungen/FHNW_HABG_10mm.jpg} \\
+    % FHNW_HABG_10mm.jpg: 0x0 pixel, 300dpi, 0.00x0.00 cm, bb=
+    \includegraphics[width=0.2\textwidth]{./Abbildungen/iNovitas_Logo.png} \\
+    % iNovitas_Logo.png: 0x0 pixel, 300dpi, 0.00x0.00 cm, bb=
+    \includegraphics[width=0.7\textwidth]{./Abbildungen/F&E_Absender_Dritte_Un_D_1200.png}
+% F&E_Absender_Dritte_Un_D_1200.png: 0x0 pixel, 300dpi, 0.00x0.00 cm, bb=
+    \end{center}
+    
+    \end{column}
+    
    \end{columns}
   \end{frame}
 
@@ -131,13 +146,22 @@
    \begin{columns}[onlytextwidth]
     \begin{column}{0.5\textwidth}
     
-    % TODO insert Image (imms protytype)
-    
+    \begin{figure}[h]
+      \centering
+      \includegraphics[height=6.05cm]{./Abbildungen/imms.png}
+      %\caption{IMMS prototype}
+      \label{abb:imms}
+    \end{figure}
+
     \end{column}
     \begin{column}{0.5\textwidth}
       \begin{itemize}
-       \item IMMS prototype (see image) %TODO Link 
+       \item IMMS prototype (see figure)  
        \begin{itemize}
+        \item panorama camera
+        \item laser scanner
+        \item IMU (tactical grade)
+        \item GNSS
 	\item weight: $30\,kg$ ($66.1\, lbs$)
 	\item hardware changes necessary
        \end{itemize}
@@ -147,6 +171,7 @@
        \item Existing modules for hardware support
       \end{itemize}
     \end{column}
+
    \end{columns}
   \end{frame}
 
@@ -158,22 +183,23 @@
     \begin{column}{0.5\textwidth}
     
       \begin{itemize}
-       \item Software framework for robots \pause
-       \item Free and Open-Source \pause
-       \item Graph-based communication layer \pause
-       \item Collection of tools and libraries \pause
+       \item Software framework for robots 
+       \item Free and Open-Source 
+       \item Graph-based communication layer 
+       \item Collection of tools and libraries 
        \item Multi-lingual 
        \begin{itemize}
 	\item C++
-	\item \textbf{Python} \pause
+	\item \textbf{Python} 
        \end{itemize}
        \item \url{www.ros.org}
       \end{itemize}
     
     \end{column}
     \begin{column}{0.5\textwidth}
-    
-    % TODO insert Image (ROS Logo)
+
+    \includegraphics[width=1.5\textwidth]{./Abbildungen/ros_screenshot.png}
+    % ros_screenshot.png: 0x0 pixel, 300dpi, 0.00x0.00 cm, bb=
     
     \end{column}
    \end{columns}
@@ -187,14 +213,21 @@
       \begin{description}
        \item [\textbf{Node}] software module, process
        \item [\textbf{Messages}] data in a predefined structure
-       \item [\textbf{Topic}] where messages go through \pause
+       \item [\textbf{Topic}] where messages go through
        \item [\textbf{Service}] allows synchronous communication (request / response)
       \end{description}
        
     \end{column}
     \begin{column}{0.5\textwidth}
 
-    % TODO insert Figure with communication layer
+    \begin{figure}[h]
+      \centering
+      \includegraphics[width=\textwidth]{./Abbildungen/ROS-Graph-basic.png}
+      % ROS-Graph-basic.png: 0x0 pixel, 300dpi, 0.00x0.00 cm, bb=
+      \caption{ROS communication principle}
+      \label{abb:graph}
+    \end{figure}
+% TODO insert Figure with communication layer
     \end{column}
    \end{columns}
   \end{frame}

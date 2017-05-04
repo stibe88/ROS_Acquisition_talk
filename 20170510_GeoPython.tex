@@ -246,193 +246,105 @@
 
   \end{frame}
 
+% Python listings image event counter
+\defverbatim[colored]\lstOne{
+  \begin{lstlisting}[language=python, basicstyle=\ttfamily, keywordstyle=\color{blue}]
+#!/usr/bin/env python
+import rospy
+from std_msgs.msg import *
+
+class ImageEventCounter():
+    [...]
+
+def main():
+    [...]
+
+if __name__ == '__main__':
+    main()
+  \end{lstlisting}
+}
+\defverbatim[colored]\lstTwo{
+  \begin{lstlisting}[language=python, basicstyle=\ttfamily, keywordstyle=\color{blue}]
+def main():
+    rospy.init_node("ImageEventCounter", 
+                    anonymous=True)
+    image_event_counter_node = ImageEventCounter()
+    try:
+        rospy.spin()
+    except KeyboardInterrupt:
+        pass
+  \end{lstlisting}
+}
+\defverbatim[colored]\lstThree{
+  \begin{lstlisting}[language=python, basicstyle=\ttfamily, keywordstyle=\color{blue}]
+class ImageEventCounter():
+    def __init__(self):
+        # read out parameter
+        self.counter = \
+            rospy.get_param('counter_start', 0)
+        mark_1_time_topic_name = \
+            rospy.get_param('subscriber_name', 
+                            '/mark_1_time')
+        n_mark_1_time_topic_name = \
+            rospy.get_param('publisher_name', 
+                            '/n_mark_1_time')
+	[...]
+  \end{lstlisting}
+}
+\defverbatim[colored]\lstFour{
+  \begin{lstlisting}[language=python, basicstyle=\ttfamily, keywordstyle=\color{blue}]
+class ImageEventCounter():
+    def __init__(self):
+	[...]
+	self.mark_1_time_sub = \
+	    rospy.Subscriber(mark_1_time_topic_name,
+                             Time,
+                             self.mark_1_time_callback)
+        self.mark_1_time_pub = \
+	    rospy.Publisher(n_mark_1_time_topic_name,
+                            UInt32,
+                            queue_size=1)
+    def mark_1_time_callback(self, time):
+        [...]
+  \end{lstlisting}
+}
+\defverbatim[colored]\lstFive{
+  \begin{lstlisting}[language=python, basicstyle=\ttfamily, keywordstyle=\color{blue}]
+class ImageEventCounter():
+    def __init__(self):
+	[...]
+    def mark_1_time_callback(self, time):
+        self.counter += 1
+        self.mark_1_time_pub.publish(UInt32(\
+                                     self.counter))
+  \end{lstlisting}
+}
+
+\begin{frame}
+ \frametitle{Node ImageEventCounter}
+ \lstOne
+\end{frame}
+
+\begin{frame}
+ \frametitle{Node ImageEventCounter}
+ \lstTwo
+\end{frame}
+
+\begin{frame}
+ \frametitle{Node ImageEventCounter}
+ \lstThree
+\end{frame}
+
+\begin{frame}
+ \frametitle{Node ImageEventCounter}
+ \lstFour
+\end{frame}
+
+\begin{frame}
+ \frametitle{Node ImageEventCounter}
+ \lstFive
+\end{frame}
 
 \section{Conclusion and Outlook}
-
-
-
-
-% %----------------------------------------------------------------------------------------
-% % Listings mit Python-Code
-% \defverbatim[colored]\lstOne{
-% \begin{lstlisting}[language=python,basicstyle=\ttfamily,keywordstyle=\color{blue}]
-% #!/usr/bin/env python
-% import rospy
-% from std_msgs.msg import String
-% 
-% def talker():
-%     [...]
-% 
-% if __name__ == '__main__':
-%     try:
-%         talker()
-%     except rospy.ROSInterruptException:
-%         pass
-% \end{lstlisting}
-% }
-% 
-% \defverbatim[colored]\lstTwo{
-% \begin{lstlisting}[language=python,basicstyle=\ttfamily,keywordstyle=\color{blue}]
-% [...]
-% def talker():
-%     pub = rospy.Publisher('chatter', \ 
-%     String, queue_size=10)
-%     rospy.init_node('talker')
-%     rate = rospy.Rate(10) # 10hz
-%     while not rospy.is_shutdown():
-%         hello_str = "hello world %s" \
-%         % rospy.get_time()
-%         pub.publish(hello_str)
-%         rate.sleep()
-% [...]
-% \end{lstlisting}
-% }
-% 
-% \defverbatim[colored]\lstThree{
-% \begin{lstlisting}[language=python,basicstyle=\ttfamily,keywordstyle=\color{blue}]
-% #!/usr/bin/env python
-% import rospy
-% from std_msgs.msg import String
-% 
-% def callback(data):
-%     rospy.loginfo(rospy.get_caller_id() + \
-%     "I heard %s", data.data)  
-% def listener():
-%     rospy.init_node('listener')
-%     rospy.Subscriber("chatter", String, \
-%     callback)
-%     rospy.spin()
-% if __name__ == '__main__':
-%     listener()
-% \end{lstlisting}
-% }
-%--------------------------------------------------------------------------------
-
-% % TITELSEITE
-% \begin{frame}
-%  \titlepage
-% \end{frame}
-% 
-% % WAS IST ROS
-% \section{Was ist ROS?}
-% \begin{frame}
-% \frametitle{Was ist ROS?}
-% \begin{itemize}
-%  \item Robotic Operating System (ROS)
-%  \item Flexibles Framework für die Robotiksoftwareentwicklung
-%  \item FOSS (freie Open Source-Software)
-%  \item Ubuntu
-%  \item Weite Verbreitung (in der Robotik-Community)
-%  \item Modulares Design
-%  \item Graph-basiertes Kommunikationskonzept (Synchron und Asynchron)
-%  \item Breite Sensorunterstützung
-%  \item Mächtige Tools
-% \end{itemize}
-% \end{frame}
-% 
-% % graph-basiertes Kommunikationskonzept
-% \section{Graph-basiertes Kommunikationskonzept}
-% \begin{frame}
-%  \frametitle{Graph-basiertes Kommunikationskonzept}
-% \begin{figure}[h!]
-%  \centering
-%  \includegraphics{./Abbildungen/ROS-Graph-basic.png}
-%  % ROS-Graph-basic.png: 1127x397 pixel, 300dpi, 9.54x3.36 cm, bb=0 0 270 95
-%  \caption{ROS-Kommunikationskonzept}
-%  \label{abb:ROSCOM}
-% \end{figure}
-% 
-% 
-% \end{frame}
-% 
-% % Publisher
-% \section{Publisher}
-% \begin{frame}
-%  \frametitle{Node mit «Hello World»-Publisher}
-%   \lstOne
-% \end{frame}
-% 
-% \begin{frame}
-%  \frametitle{Node mit «Hello World»-Publisher}
-%   \lstTwo
-% \end{frame}
-% 
-% % Subscriber
-% \section{Subscriber}
-% \begin{frame}
-%  \frametitle{Node mit «Hello World»-Subscriber}
-%  \lstThree
-% \end{frame}
-% 
-% \begin{frame}
-%  \frametitle{Video Hello World-Demo}
-% \begin{center}
-% \movie[showcontrols]{\includegraphics[width=1\textwidth]{./Abbildungen/Video.jpg}}{./Abbildungen/ROSTutorial.mpg}
-% \end{center}
-%   %\includemovie[autoplay]{4cm}{3cm}{./Abbildungen/ROSTutorial.mpg}
-% \end{frame}
-% 
-% 
-% % Anwendungen
-% \section{Unterstützung}
-% \begin{frame}
-%  \frametitle{Hardware-Support}
-%  Zahlreiche frei verfügbare Nodes für:
-%  \begin{itemize}
-%   \item Kameras
-%   \item IMUs
-%   \item Laserscanner
-%   \item Odometer
-%   \item Datenvisualisierung
-%   \item Steuerung
-%   \item ...
-%  \end{itemize}
-% \begin{figure}[h!]
-%  \centering
-%  \includegraphics[width=4cm]{./Abbildungen/MMS.jpg}
-%  % MMS.jpg: 400x196 pixel, 72dpi, 14.11x6.91 cm, bb=0 0 400 196
-%  \caption{Mobile Mapping System des IVGI}
-%  \label{abb:MMS}
-% \end{figure}
-% \end{frame}
-% 
-% \begin{frame}
-% \frametitle{Video SLAM-Demo}
-%  \begin{center}
-% \movie[showcontrols]{\includegraphics[width=1\textwidth]{./Abbildungen/Video.jpg}}{./Abbildungen/ROSSlam.mp4}
-% \end{center}
-% \end{frame}
-% 
-% 
-% 
-% \section{Fazit}
-% % FAZIT
-% \begin{frame}
-%  \frametitle{Fazit}
-%  \begin{itemize}
-%   \item Zusammenstellung von Realtime-Processing-Pipelines dank modularem Aufbau
-%   \item Hohe Flexibilität
-%   \item Weite Verbreitung
-%   \item Schnelle Entwicklung mit Python
-%   \item Einsatz für Robotik-Anwendungen und Multisensorsystemen
-%  \end{itemize}
-% 
-% \end{frame}
-% 
-% \begin{frame}
-% 
-% \textbf{ Danke für Ihre Aufmerksamkeit!}
-% \begin{figure}[h!]
-%  \centering
-%  \includegraphics[height=4cm]{./Abbildungen/stair.jpg}
-%  % stair.jpg: 782x1650 pixel, 72dpi, 27.59x58.21 cm, bb=0 0 782 1650
-%  \caption{Erster Roboter mit ROS: STanford Artificial Intelligence Robot}
-%  \label{abb:Stair}
-% \end{figure}
-% 
-% \end{frame}
-
-
-
 
 \end{document}

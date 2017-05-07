@@ -1,0 +1,46 @@
+This is BibTeX, Version 0.99d (TeX Live 2015/Debian)
+Capacity: max_strings=35307, hash_size=35307, hash_prime=30011
+The top-level auxiliary file: 20170510_GeoPython.aux
+The style file: dcu.bst
+Database file #1: 20170510_GeoPython.bib
+You've used 3 entries,
+            2921 wiz_defined-function locations,
+            660 strings with 5623 characters,
+and the built_in function-call counts, 23035 in all, are:
+= -- 3778
+> -- 378
+< -- 1
++ -- 1891
+- -- 119
+* -- 2083
+:= -- 4469
+add.period$ -- 6
+call.type$ -- 3
+change.case$ -- 42
+chr.to.int$ -- 3
+cite$ -- 3
+duplicate$ -- 54
+empty$ -- 110
+format.name$ -- 128
+if$ -- 4154
+int.to.chr$ -- 5
+int.to.str$ -- 0
+missing$ -- 3
+newline$ -- 17
+num.names$ -- 33
+pop$ -- 7
+preamble$ -- 1
+purify$ -- 45
+quote$ -- 0
+skip$ -- 55
+stack$ -- 0
+substring$ -- 5456
+swap$ -- 16
+text.length$ -- 43
+text.prefix$ -- 0
+top$ -- 0
+type$ -- 12
+warning$ -- 0
+while$ -- 69
+width$ -- 0
+write$ -- 51

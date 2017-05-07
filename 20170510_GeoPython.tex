@@ -25,6 +25,7 @@
 
 
 
+
 \begin{document}
 % infos for pdf document settings
 \pdfinfo{
@@ -60,7 +61,6 @@
     Mobile Mapping
       \begin{itemize}
        \item Image-based Mobile Mapping \newline(since 2011 @ FHNW)
-       % TODO cite Burkhard et. al (2011)
        \item Spin-off company iNovitas
        \item ``Google Street View''-like service
        \item Measurement functionality
@@ -69,6 +69,7 @@
         \item relative: ca. $1\, cm$
         \item absolute: ca. $3-5\, cm$ \newline(GNSS accuracy)
        \end{itemize}
+       \cite{Burkhard2012}
       \end{itemize}
     \end{column}
     \begin{column}{0.5\textwidth}
@@ -166,6 +167,7 @@
 	\item C++
 	\item \textbf{Python} 
        \end{itemize}
+       \cite{Quigley2009}
        \item \url{www.ros.org}
       \end{itemize}
     
@@ -399,11 +401,12 @@ class ImageEventCounter():
    \begin{itemize} 
     \item Google cartographer
     \begin{itemize}
-     \item simultaneous localization and mapping
+     \item simultaneous localization and mapping (SLAM)
      \item Open source software since 05.10.2016
-     \item 2D and 3D based SLAM
-     \item ROS module available
-     % TODO insert citation of google paper
+     \item ROS support
+     \item both, 2D and 3D SLAM version
+     \item loop closure
+     \cite{Hess2016}
     \end{itemize}
     \item using lidar pointcloud
     \item using imu raw data
@@ -428,6 +431,13 @@ class ImageEventCounter():
  \frametitle{Outlook}
 \end{frame}
 
+\begin{frame}
+%\bibliography{20170510_GeoPython}
+\frametitle{Literatur}
+\small\setbeamertemplate{bibliography item}[text]\bibliography{20170510_GeoPython}
 
+\bibliographystyle{dcu}
+%\renewcommand{\bibliography}
+\end{frame}
 
 \end{document}

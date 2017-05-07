@@ -13,6 +13,8 @@
 %\usepackage{enumitem}
 \usepackage{harvard}
 \usepackage{url}
+\usepackage{import}
+\usepackage{gensymb}
 \citationstyle{dcu}
 %\setbeamertemplate{footline}[page number]
 \usetheme{FHNW}
@@ -48,26 +50,6 @@
 \end{frame}
 
 \section{Introduction}
-
-% Frame 1: Trends in geodata acquisition
-  \begin{frame}
-   \frametitle{Introduction}
-   \begin{columns}[onlytextwidth]
-    \begin{column}{0.5\textwidth}
-    
-    % TODO insert Image (IOT)
-    
-    \end{column}
-    \begin{column}{0.5\textwidth}
-    Trends in geodata acquisition:
-      \begin{itemize}
-       \item outsourcing / crowd-sourcing
-       \item IoT
-       \item using sophisticated multi-sensor systems
-      \end{itemize}
-    \end{column}
-   \end{columns}
-  \end{frame}
 
 % Frame 2: Mobile Mapping
   \begin{frame}
@@ -142,33 +124,25 @@
 \section{Software Requirements}
 
   \begin{frame}
-   \frametitle{Requirements for the acquisition software}
+   \frametitle{Indoor mobile mapping system prototype}
    \begin{columns}[onlytextwidth]
     \begin{column}{0.5\textwidth}
-    
-    \begin{figure}[h]
-      \centering
-      \includegraphics[height=6.05cm]{./Abbildungen/imms.png}
-      %\caption{IMMS prototype}
-      \label{abb:imms}
-    \end{figure}
-
+      \def\svgwidth{5.5cm}
+      \input{./Abbildungen/imms_explanation.pdf_tex}
     \end{column}
     \begin{column}{0.5\textwidth}
       \begin{itemize}
-       \item IMMS prototype (see figure)  
-       \begin{itemize}
-        \item panorama camera
-        \item laser scanner
-        \item IMU (tactical grade)
-        \item GNSS
+        \item multi sensor system
 	\item weight: $30\,kg$ ($66.1\, lbs$)
-	\item hardware changes necessary
-       \end{itemize}
+	\item research prototype
+	\item hardware components might change during project time
        \pause
+       \item acquisition software requirements:
+       \begin{itemize}
        \item Modular software architecture
        \item Free open source software (FOSS)
        \item Existing modules for hardware support
+       \end{itemize}
       \end{itemize}
     \end{column}
 
@@ -240,8 +214,21 @@
       \centering
       \includegraphics[width=13.5cm]{./Abbildungen/ROSImageCapturing.png}
       % ROSImageCapturing.png: 0x0 pixel, 300dpi, 0.00x0.00 cm, bb=
-      \caption{Graph-based software design of the image acquisition part}
+      %\caption{Graph-based software design of the image acquisition part}
       \label{abb:ROSImageCapturing}
+    \end{figure}
+
+  \end{frame}
+  
+  \begin{frame}
+   \frametitle{Acquisition software design}
+    
+    \begin{figure}[h]
+      \centering
+      \includegraphics[width=13.5cm]{./Abbildungen/ROSImageCapturingFrame.png}
+      % ROSImageCapturing.png: 0x0 pixel, 300dpi, 0.00x0.00 cm, bb=
+      %\caption{Graph-based software design of the image acquisition part}
+      \label{abb:ROSImageCapturingFrame}
     \end{figure}
 
   \end{frame}
@@ -282,12 +269,12 @@ class ImageEventCounter():
         # read out parameter
         self.counter = \
             rospy.get_param('counter_start', 0)
-        mark_1_time_topic_name = \
+        subscriber_tn = \
             rospy.get_param('subscriber_name', 
-                            '/mark_1_time')
-        n_mark_1_time_topic_name = \
+                            '/trigger_time')
+        publisher_tn = \
             rospy.get_param('publisher_name', 
-                            '/n_mark_1_time')
+                            '/image_nr')
 	[...]
   \end{lstlisting}
 }
@@ -296,15 +283,15 @@ class ImageEventCounter():
 class ImageEventCounter():
     def __init__(self):
 	[...]
-	self.mark_1_time_sub = \
-	    rospy.Subscriber(mark_1_time_topic_name,
+	self.trigger_time_sub = \
+	    rospy.Subscriber(subscriber_tn,
                              Time,
-                             self.mark_1_time_callback)
-        self.mark_1_time_pub = \
-	    rospy.Publisher(n_mark_1_time_topic_name,
+                             self.subscriber_callback)
+        self.trigger_count_pub = \
+	    rospy.Publisher(publisher_tn,
                             UInt32,
                             queue_size=1)
-    def mark_1_time_callback(self, time):
+    def subscriber_callback(self, time):
         [...]
   \end{lstlisting}
 }
@@ -313,38 +300,134 @@ class ImageEventCounter():
 class ImageEventCounter():
     def __init__(self):
 	[...]
-    def mark_1_time_callback(self, time):
+    def subscriber_callback(self, time):
         self.counter += 1
-        self.mark_1_time_pub.publish(UInt32(\
-                                     self.counter))
+        self.trigger_count_pub(UInt32(\
+                               self.counter))
   \end{lstlisting}
 }
 
 \begin{frame}
- \frametitle{Node ImageEventCounter}
+ \frametitle{ImageEventCounter -- node structure}
  \lstOne
 \end{frame}
 
 \begin{frame}
- \frametitle{Node ImageEventCounter}
+ \frametitle{ImageEventCounter -- main function}
  \lstTwo
 \end{frame}
 
 \begin{frame}
- \frametitle{Node ImageEventCounter}
+ \frametitle{ImageEventCounter -- read out parameter}
  \lstThree
 \end{frame}
 
 \begin{frame}
- \frametitle{Node ImageEventCounter}
+ \frametitle{ImageEventCounter -- publisher / subscriber}
  \lstFour
 \end{frame}
 
 \begin{frame}
- \frametitle{Node ImageEventCounter}
+ \frametitle{ImageEventCounter -- subscriber callback}
  \lstFive
 \end{frame}
 
+  \begin{frame}
+   \frametitle{Controller node}
+    
+    \begin{figure}[h]
+      \centering
+      \includegraphics[width=13.5cm]{./Abbildungen/ROSImageCapturingGUI.png}
+      % ROSImageCapturing.png: 0x0 pixel, 300dpi, 0.00x0.00 cm, bb=
+      %\caption{Graph-based software design of the image acquisition part}
+      %\label{abb:ROSImageCapturing}
+    \end{figure}
+
+  \end{frame}
+  
+  \begin{frame}
+   \frametitle{Controller node}
+    
+    \begin{itemize}
+     \item dynamic parameter changes
+     \item change node settings
+     \item launches and kills nodes
+     \item GUI 
+     \begin{itemize}
+      \item developed with pyqt4
+      \item put ROS node into pyqt4-loop
+      \item \textit{rospy.spin()} becomes obivious
+    \end{itemize}
+    \end{itemize}
+
+  \end{frame}
+  
+  \begin{frame}
+   %\frametitle{Controller node -- GUI}
+   \begin{center}
+    \includegraphics[width=10cm]{./Abbildungen/GUI_1.png}
+    % GUI_1.png: 0x0 pixel, 300dpi, 0.00x0.00 cm, bb=
+   \end{center}
+  \end{frame}
+  
+  \begin{frame}
+   %\frametitle{Controller node -- GUI}
+   \begin{center}
+    \includegraphics[width=10cm]{./Abbildungen/GUI_2.png}
+    % GUI_1.png: 0x0 pixel, 300dpi, 0.00x0.00 cm, bb=
+   \end{center}
+  \end{frame}
+
+  \begin{frame}
+   %\frametitle{Controller node -- GUI}
+   \begin{center}
+    \includegraphics[width=10cm]{./Abbildungen/GUI_3.png}
+    % GUI_1.png: 0x0 pixel, 300dpi, 0.00x0.00 cm, bb=
+   \end{center}
+  \end{frame}
+  
+  \begin{frame}
+   %\frametitle{Controller node -- GUI}
+   \begin{center}
+    \includegraphics[width=10cm]{./Abbildungen/GUI_4.png}
+    % GUI_1.png: 0x0 pixel, 300dpi, 0.00x0.00 cm, bb=
+   \end{center}
+  \end{frame}
+  
+  \begin{frame}
+   \frametitle{SLAM (post processing)}
+   \begin{itemize} 
+    \item Google cartographer
+    \begin{itemize}
+     \item simultaneous localization and mapping
+     \item Open source software since 05.10.2016
+     \item 2D and 3D based SLAM
+     \item ROS module available
+     % TODO insert citation of google paper
+    \end{itemize}
+    \item using lidar pointcloud
+    \item using imu raw data
+    \item possible substitution of GNSS in indoor environment
+   \end{itemize}
+  \end{frame}
+  
+  \begin{frame}
+   \frametitle{SLAM (post processing)}
+   %TODO insert video
+  \end{frame}
+
+
+
 \section{Conclusion and Outlook}
+
+\begin{frame}
+ \frametitle{Conclusion}
+\end{frame}
+
+\begin{frame}
+ \frametitle{Outlook}
+\end{frame}
+
+
 
 \end{document}

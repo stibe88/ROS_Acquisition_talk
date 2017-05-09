@@ -2,6 +2,10 @@ This is BibTeX, Version 0.99d (TeX Live 2015/Debian)
 Capacity: max_strings=35307, hash_size=35307, hash_prime=30011
 The top-level auxiliary file: 20170510_GeoPython.aux
 The style file: dcu.bst
+Illegal, another \bibstyle command---line 104 of file 20170510_GeoPython.aux
+ : \bibstyle
+ :          {dcu}
+I'm skipping whatever remains of this command
 Database file #1: 20170510_GeoPython.bib
 You've used 3 entries,
             2921 wiz_defined-function locations,
@@ -44,3 +48,4 @@ warning$ -- 0
 while$ -- 69
 width$ -- 0
 write$ -- 51
+(There was 1 error message)

@@ -11,11 +11,12 @@
 \usepackage[scaled]{helvet}
 \renewcommand*\familydefault{\sfdefault}
 %\usepackage{enumitem}
-\usepackage{harvard}
+\usepackage[comma]{natbib}
 \usepackage{url}
 \usepackage{import}
 \usepackage{gensymb}
-\citationstyle{dcu}
+\bibliographystyle{dcu}
+%\citationstyle{dcu}
 %\setbeamertemplate{footline}[page number]
 \usetheme{FHNW}
 \usecolortheme{seagull}
@@ -69,7 +70,7 @@
         \item relative: ca. $1\, cm$
         \item absolute: ca. $3-5\, cm$ \newline(GNSS accuracy)
        \end{itemize}
-       \cite{Burkhard2012}
+       \citep{Burkhard2012}
       \end{itemize}
     \end{column}
     \begin{column}{0.5\textwidth}
@@ -398,24 +399,27 @@ class ImageEventCounter():
   
   \begin{frame}
    \frametitle{SLAM (post processing)}
-   \begin{itemize} 
+   \begin{itemize}
+    \item simultaneous localization and mapping (SLAM)
+    \item different SLAM techniques (lidar-based, visual-based, ...)
+    \item some SLAM algorithms are supporting loop closure
+    \item possible subtitution of GNSS in indoor environment
+    \pause
     \item Google cartographer
     \begin{itemize}
-     \item simultaneous localization and mapping (SLAM)
+     \item lidar-based SLAM algorithm with IMU support
      \item Open source software since 05.10.2016
      \item ROS support
-     \item both, 2D and 3D SLAM version
+     \item both, 2D and 3D SLAM version \citep{Hess2016}
      \item loop closure
-     \cite{Hess2016}
     \end{itemize}
-    \item using lidar pointcloud
-    \item using imu raw data
-    \item possible substitution of GNSS in indoor environment
    \end{itemize}
   \end{frame}
   
   \begin{frame}
-   \frametitle{SLAM (post processing)}
+   %\frametitle{SLAM (post processing)}
+   \movie[showcontrols]{\includegraphics[width=0.8\textwidth]{./Abbildungen/Video.jpg}}{./Abbildungen/mymovie.mp4}
+   %\movie[width=3cm,height=2cm,poster]{}{./Abbildungen/mymovie.mp4}
    %TODO insert video
   \end{frame}
 
@@ -425,19 +429,45 @@ class ImageEventCounter():
 
 \begin{frame}
  \frametitle{Conclusion}
+ \begin{itemize}
+  \item IMMS acquisition software successfully implemented $\rightarrow$ based on ROS
+  \item graph-based architecture $\rightarrow$ flexibility \pause
+  \item numerous existing free open source ROS packages available
+  \item from hardware node up to SLAM algorithm \pause
+  \item wide ROS community $\rightarrow$ quasi-standard in robotics \pause
+  \item learning curve
+ \end{itemize}
+
 \end{frame}
 
 \begin{frame}
  \frametitle{Outlook}
+ \begin{itemize}
+  \item Indoor localization $\rightarrow$ Replacement of INS by SLAM
+  \item real time SLAM
+  \item weight loss about $10\,kg$
+  \item use SLAM map as progress control
+  \item replacement of ladybug5 camera by a stereo panorama camera
+  \item several GUI optimizations
+  \item ...
+ \end{itemize}
+
 \end{frame}
 
 \begin{frame}
 %\bibliography{20170510_GeoPython}
-\frametitle{Literatur}
+\frametitle{Literature}
 \small\setbeamertemplate{bibliography item}[text]\bibliography{20170510_GeoPython}
 
 \bibliographystyle{dcu}
 %\renewcommand{\bibliography}
+\end{frame}
+
+\begin{frame}
+ \frametitle{Thank you for your attention!}
+ \begin{itemize}
+  \item Questions?
+ \end{itemize}
 \end{frame}
 
 \end{document}
